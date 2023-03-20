@@ -13,4 +13,4 @@ To get an overview of the project, read the [README](README.md). Here are some r
 - [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow)
 - [Collaborating with pull requests](https://docs.github.com/en/github/collaborating-with-pull-requests)
 
-* Each feature/API/PR should be supported with adequate tests and documentation. Documentation and tests are first class citizens of the project. This helps the project survive in the long run.*
+* Each feature/API/PR should be supported with adequate tests and documentation. Documentation and tests are first class citizens of the project. This helps the project survive in the long run.
