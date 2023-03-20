@@ -4,8 +4,6 @@ Thank you for investing your time in contributing to our project!
 
 Read our [Code of Conduct](./CODE_OF_CONDUCT.md) to keep our community approachable and respectable.
 
-We will begin this guide to get new contributors to get started with pull requests and we will update this guide as we progress through the project.
-
 ## New contributor guide
 
 To get an overview of the project, read the [README](README.md). Here are some resources to help you get started with open source contributions:
