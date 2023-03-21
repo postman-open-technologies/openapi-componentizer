@@ -4,10 +4,15 @@
 </div>
 
   This is a GSoC 2023 project. Initial project is proposed at [Postman Open Technologies GSoC 2023](https://github.com/postman-open-technologies/gsoc-2023/issues/9)
-  ** Mentoring organization: ** [Postman](https://www.postman.com)
-  ** Organizer: ** [Postman Open Technologies](https://github.com/postman-open-technologies)
-  ** Mentors: ** [Bala Avulapati](https://github.com/bavulapati), [Darshan Sen](https://github.com/RaisinTen), [Arvind Kalra](https://github.com/arvindkalra08)
-  ** OpenAPI Specification Lead: ** [Mike Ralphson](https://github.com/MikeRalphson)
+  
+**Mentoring organization:** [Postman](https://www.postman.com)
+
+**Organizer:** [Postman Open Technologies](https://github.com/postman-open-technologies)
+
+**Mentors:** [Bala Avulapati](https://github.com/bavulapati), [Darshan Sen](https://github.com/RaisinTen), [Arvind Kalra](https://github.com/arvindkalra08)
+
+**OpenAPI Specification Lead:** [Mike Ralphson](https://github.com/MikeRalphson)
+
 ## Product Requirements
   What are the functions and features required?
 - A Command Line Interface (**CLI**) tool and library taking one or more OpenAPI 3.x specifications in JSON or YAML (YAML is a superset of JSON so you can read JSON with any YAML parser) and producing the either one OpenAPI document with all the common [components](https://oai.github.io/Documentation/specification/components.html) moved to the `components` section (in the case of a single input file) or moved to a new common OAS document's `components` section (in the case of two or more input files).
