@@ -102,11 +102,11 @@ const getResponses = (document) => {
 const getParameters = (document) => {
     let res = [];
 
-    pathItemObjects = getPathItems(document,1);
+    const pathItemObjects = getPathItems(document,1);
     for(let pathItem in pathItemObjects){
         const pathItemObject = JSON.parse(pathItemObjects[pathItem]);
         
-        // pathItemObject.parameters.x -> [Parameter Object | Reference Object]
+        // pathItemObject.parameters[x] -> Parameter Object | Reference Object [x-> int]
 
         if(pathItemObject.parameters){
             const parameters = pathItemObject.parameters;
@@ -116,7 +116,7 @@ const getParameters = (document) => {
             }
         }
 
-        //pathItemObject.x.parameters.x -> [Parameter Object | Reference Object]
+        // pathItemObject[x].parameters[y] -> Parameter Object | Reference Object [x-> Operation Object, y-> int]
 
         for(let operation in pathItemObject){
             const operationObject = pathItemObject[operation];
@@ -130,20 +130,20 @@ const getParameters = (document) => {
         }
     }
 
-    //linkObject.parameters.x -> Map[string, Any | {expression}]
+    // //linkObject.parameters.x -> Map[string, Any | {expression}]
 
-    const linkObjects = getLinks(document);
-    for(let link in linkObjects){
-        const linkObject = JSON.parse(linkObjects[link]);
-        if(linkObject.parameters){
-            const parameters = linkObject.parameters;
-            for(let parameter in parameters){
-                let parameterObject = {}; 
-                parameterObject[parameter] = parameters[parameter];
-                res.push(JSON.stringify(parameterObject, undefined, 4));
-            }
-        }
-    }
+    // const linkObjects = getLinks(document);
+    // for(let link in linkObjects){
+    //     const linkObject = JSON.parse(linkObjects[link]);
+    //     if(linkObject.parameters){
+    //         const parameters = linkObject.parameters;
+    //         for(let parameter in parameters){
+    //             let parameterObject = {}; 
+    //             parameterObject[parameter] = parameters[parameter];
+    //             res.push(JSON.stringify(parameterObject, undefined, 4));
+    //         }
+    //     }
+    // }
     return res;
 }
 

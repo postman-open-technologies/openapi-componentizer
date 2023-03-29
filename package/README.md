@@ -60,11 +60,11 @@ Done
 
 * pathItemObject[x].responses[y] -> Response Object | Reference Object [x->Operation, y->Status Code]
 
-## Parameters  (3)
+## Parameters  (2)
 
-* pathItemObject.parameters.x -> [Parameter Object | Reference Object]
-* pathItemObject.x.parameters.x -> [Parameter Object | Reference Object]
-* linkObject.parameters.x -> Map[string, Any | {expression}]
+* pathItemObject.parameters[x] -> Parameter Object | Reference Object [x-> int]
+* pathItemObject[x].parameters[y] -> Parameter Object | Reference Object [x-> Operation Object, y-> int]
+<!-- * linkObject.parameters.x -> Map[string, Any | {expression}] --> -> Not a parameterObject
 
 ## Examples (4)
 * requestBodyObject.content.x.examples.y -> Example Object
@@ -75,7 +75,7 @@ Done
 
 ## Request Bodies (1)
 
-* pathItemObject[x]requestBody -> Request Body Object | Reference Object [x-> Operation Object]
+* pathItemObject[x].requestBody -> Request Body Object | Reference Object [x-> Operation Object]
 
 ## Headers (2)
 
