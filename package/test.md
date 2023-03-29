@@ -5,7 +5,7 @@
 * [x] parameters
 * [ ] examples
 * [x] requestBodies
-* [ ] headers
+* [x] headers
 * [x] securitySchemes
 * [x] links
 * [x] callbacks
@@ -54,10 +54,24 @@ Correct
 ```
 Done
 
+## requestBodies (1)
 
+### Test 1
+```
+pathItemObject[x]requestBody -> Request Body Object |
+Reference Object [x-> Operation Object]
+```
+Input
+```
+https://oai.github.io/Documentation/examples/tictactoe.yaml
+```
+Output
+```
+Correct
+```
+Done
 
-
-## headers
+## headers (2)
 
 ### Test 1
 ```
@@ -85,6 +99,7 @@ Output
 Correct
 ```
 ***
+Done
 
 ## securitySchemes (1)
 
@@ -103,24 +118,7 @@ Correct
 Done
 ***
 
-## requestBodies (1)
-
-### Test 1
-```
-pathItemObject[x]requestBody -> Request Body Object |
-Reference Object [x-> Operation Object]
-```
-Input
-```
-https://oai.github.io/Documentation/examples/tictactoe.yaml
-```
-Output
-```
-Correct
-```
-Done
-
-## links
+## links (1)
 
 ### Test 1
 ```
@@ -137,7 +135,7 @@ Correct
 ***
 Done
 
-## callbacks
+## callbacks (1)
 
 ### Test 1
 ```
