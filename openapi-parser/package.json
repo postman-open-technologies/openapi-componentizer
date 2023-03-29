@@ -2,10 +2,11 @@
   "name": "openapi-componentizer",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsup src/index.ts --dts",
-    "start": "ts-node src/cli/index.ts",
+    "start": "ts-node src/cli/main.ts",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
