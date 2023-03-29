@@ -10,6 +10,7 @@ async function main() {
     const objects = extractObjectsByType(openApiSpec, options.type)
     console.log(JSON.stringify(objects, null, 2))
   } catch (error) {
+    console.error(`Error: ${(error as Error).message}`)
     process.exit(1)
   }
 }
