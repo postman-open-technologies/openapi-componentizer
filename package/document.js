@@ -5,7 +5,7 @@ const { type } = require('express/lib/response');
 
 const getDocument = async (url, resolve) =>
 {   if(resolve){
-        swaggerClient = await new SwaggerClient({url});
+        let swaggerClient = await new SwaggerClient({url});
         return swaggerClient.spec;
     }
     else{

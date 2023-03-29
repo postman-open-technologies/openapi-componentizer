@@ -9,7 +9,7 @@
 * [x] securitySchemes
 * [x] links
 * [x] callbacks
-* [ ] pathItems
+* [x] pathItems
 ## responses (1)
 ```
 pathItemObject[x].responses[y] -> Response Object | Reference Object [x->Operation, y->Status Code]
@@ -53,55 +53,9 @@ Output
 Correct
 ```
 Done
-## callbacks
 
-### Test 1
-```
-pathItemObject[x].callbacks[y] -> Callback Object | Reference Object [x-> Operation Object] [y -> string]
-```
-Input
-```
-http://127.0.0.1:5500/callbackTest.yaml
-```
-Output
-```
-Correct
-```
-***
-Done
-## links
 
-### Test 1
-```
-response[x].links[y] -> Link Object | Reference Object [x->Status Code] [y-> string]
-```
-Input
-```
-http://127.0.0.1:5500/linkTest.yaml
-```
-Output
-```
-Correct
-```
-***
-Done
 
-## securitySchemes
-
-### Test 1
-```
-document.components.securitySchemes[x] -> Security Scheme Object | Reference Object
-```
-Input
-```
-http://127.0.0.1:5500/securitySchemeTest.yaml
-```
-Output
-```
-Correct
-```
-Done
-***
 
 ## headers
 
@@ -111,24 +65,42 @@ requestBodyObject.content[x].encoding[y].headers[z] ->Header Object | Reference 
 ```
 Input
 ```
-http://127.0.0.1:5500/headerTest1.yaml
+http://127.0.0.1:5500/package/testFiles/headerTest1.yaml
 ```
 Output
 ```
 Input
 ```
+
 ### Test 2
 ```
 response[x].headers[y] -> Header Object | Reference Object [x->Status Code]
 ```
 Input
 ```
-http://localhost:5500/headerTest2.json
+http://127.0.0.1:5500/package/testFiles/headerTest2.json
 ```
 Output
 ```
 Correct
 ```
+***
+
+## securitySchemes (1)
+
+### Test 1
+```
+document.components.securitySchemes[x] -> Security Scheme Object | Reference Object
+```
+Input
+```
+http://127.0.0.1:5500/package/testFiles/securitySchemeTest.yaml
+```
+Output
+```
+Correct
+```
+Done
 ***
 
 ## requestBodies (1)
@@ -148,7 +120,41 @@ Correct
 ```
 Done
 
-## pathItems
+## links
+
+### Test 1
+```
+response[x].links[y] -> Link Object | Reference Object [x->Status Code] [y-> string]
+```
+Input
+```
+http://127.0.0.1:5500/package/testFiles/linkTest.yaml
+```
+Output
+```
+Correct
+```
+***
+Done
+
+## callbacks
+
+### Test 1
+```
+pathItemObject[x].callbacks[y] -> Callback Object | Reference Object [x-> Operation Object] [y -> string]
+```
+Input
+```
+http://127.0.0.1:5500/package/testFiles/callbackTest.yaml
+```
+Output
+```
+Correct
+```
+***
+Done
+
+## pathItems (3)
 
 ### Test 1
 ```
@@ -165,11 +171,11 @@ Correct
 
 ### Test 2
 ```
-// callbacks[x][y] -> Path Item Object | Reference Object [x-> callback, y ->key expression]
+callbacks[x][y] -> Path Item Object | Reference Object [x-> callback, y ->key expression]
 ```
 Input
 ```
-http://127.0.0.1:5500/callbackTest.yaml
+http://127.0.0.1:5500/package/testFiles/callbackTest.yaml
 ```
 Output
 ```
@@ -177,7 +183,12 @@ Correct
 ```
 
 ### Test 3
- 
-Incomplete
+```
+document.webhooks[x] -> Path Item Object | Reference Object [x-> string]
+``` 
+Input
+```
+http://127.0.0.1:5500/package/testFiles/pathItemTest.yaml
+```
 
 ***

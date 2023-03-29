@@ -361,7 +361,7 @@ const getPathItems = (document,callbacksFlag) => {
         const webhooks = document.webhooks;
         for(let webhook in webhooks){
             const pathItemObject = webhooks[webhook];
-            res.push(JSONstringify(pathItemObject, undefined, 4));
+            res.push(JSON.stringify(pathItemObject, undefined, 4));
         }
     }
     //document.paths[x] -> Path Item Object [x-> /{path}]
