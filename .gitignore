@@ -1,0 +1,18 @@
+# dependencies
+/node_modules
+
+# production
+/dist
+/build
+
+# typescript
+*.tsbuildinfo
+
+# local env files
+.env
+
+# data dumps
+out/
+
+# testing
+/coverage
