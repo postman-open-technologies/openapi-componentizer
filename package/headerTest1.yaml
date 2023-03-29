@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: Link Example
+  version: 1.0.0
+paths:
+  /pets:
+    get:
+      tags:
+        - pet
+      summary: Updates a pet in the store with form data
+      operationId: updatePetWithForm
+      parameters:
+        - name: petId
+          in: path
+          description: ID of pet that needs to be updated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                id:
+                  # default is text/plain
+                  type: string
+                  format: uuid
+                address:
+                  # default is application/json
+                  type: object
+                  properties: {}
+                historyMetadata:
+                  # need to declare XML format!
+                  description: metadata in XML format
+                  type: object
+                  properties: {}
+                profileImage: {}
+            encoding:
+              historyMetadata:
+                # require XML Content-Type in utf-8 encoding
+                contentType: application/xml; charset=utf-8
+              profileImage:
+                # only accept png/jpeg
+                contentType: image/png, image/jpeg
+                headers:
+                  X-Rate-Limit-Limit:
+                    description: The number of allowed requests in the current period
+                    schema:
+                      type: integer
