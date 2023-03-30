@@ -28,7 +28,8 @@
 - **Distribution**: How we distribute the tool depends on the tech stack we choose. We will revisit this when we decide the tech stack.
 
 ## Note about AI usage
-   The use of Artificial Intelligence is discouraged either in your contributions or proposal preparation, as it doesn’t help us learn at the early stage in the open source community. The contributors or applicants of GSoC can include a paragraph in their proposal, that it has been written without the help of AI.
+
+The use of Artificial Intelligence is discouraged either in your contributions or proposal preparation, as it doesn’t help us learn at the early stage in the open source community. The contributors or applicants of GSoC can include a paragraph in their proposal, that it has been written without the help of AI.
 
 ## Contact
 
