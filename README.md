@@ -27,6 +27,10 @@
 - **Tech Stack:** We are thinking about Typescript, Go or C++, as the team has people familiar with this but we will consider the comfort of the contributors.
 - **Distribution**: How we distribute the tool depends on the tech stack we choose. We will revisit this when we decide the tech stack.
 
+## Note about AI usage
+
+The use of Artificial Intelligence is discouraged either in your contributions or proposal preparation, as it doesn’t help us learn at the early stage in the open source community. The contributors or applicants of GSoC can include a paragraph in their proposal, that it has been written without the help of AI.
+
 ## Contact
 
 If you have any questions or queries, please [use github discussions](https://github.com/postman-open-technologies/openapi-componentizer/discussions) on this repo, start a topic on [our community forums in the GSoC category](https://community.postman.com/c/open-technology/gsoc/42) or send an email to us at gsoc@postman.com.
