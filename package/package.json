@@ -1,6 +1,6 @@
 {
   "name": "openapi-type-finder",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Finds list of objects of given type from OpenAPI document.",
   "main": "index.js",
   "scripts": {
