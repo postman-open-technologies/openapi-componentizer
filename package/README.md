@@ -25,18 +25,15 @@ Output:
 
 ```
 {
-"200": {
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/comic"
-                }
-              }
-            },
-            "description": "OK"
-          }
+    "content": {
+        "*/*": {
+            "schema": {
+                "$ref": "#/components/schemas/comic"
+            }
+        }
+    },
+    "description": "OK"
 }
-Done
 ```
 ***
 
