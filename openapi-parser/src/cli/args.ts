@@ -2,11 +2,17 @@ import { cac } from 'cac'
 
 import { OpenApiObjectType } from '../openapi/types'
 
+/**
+ * Interface for the command line options.
+ */
 interface CliOptions {
   url: string
   type: OpenApiObjectType
 }
 
+/**
+ * Array of supported object types.
+ */
 const supportedObjectTypes: OpenApiObjectType[] = [
   'schemas',
   'responses',
@@ -20,6 +26,11 @@ const supportedObjectTypes: OpenApiObjectType[] = [
   'pathItems'
 ]
 
+/**
+ * Validates the provided command line options.
+ * @param options - The options object to validate.
+ * @returns The validated options as a CliOptions object.
+ */
 function validateOptions(options: any): CliOptions {
   if (!options.type) {
     console.error('Error: Missing required option --type')
@@ -36,6 +47,10 @@ function validateOptions(options: any): CliOptions {
   return options as CliOptions
 }
 
+/**
+ * Parses the command line arguments and returns a CliOptions object.
+ * @returns The parsed command line options as a CliOptions object.
+ */
 export function parseCliArgs(): CliOptions {
   const cli = cac('openapi-parser')
 
