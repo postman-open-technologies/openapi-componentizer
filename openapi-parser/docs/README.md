@@ -1,3 +1,5 @@
+openapi-componentizer / [Exports](modules.md)
+
 # OpenAPI Parser CLI
 
 A Command Line Interface (CLI) tool and library for parsing OpenAPI specifications and extracting objects by type. This is a qualifying task for Postman's Google Summer of Code openapi-componentizer project

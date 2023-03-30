@@ -36,14 +36,14 @@ openapi/types.ts:4
 
 ▸ **extractObjectsByType**(`openApiSpec`, `objectType`): `Record`<`string`, `unknown`\>
 
-Extracts objects of the specified type from the OpenAPI specification.
+Extracts objects of a specified type from an OpenAPI specification.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `openApiSpec` | [`OpenApiSpecification`](interfaces/OpenApiSpecification.md) | The OpenApiSpecification object to extract objects from. |
-| `objectType` | [`OpenApiObjectType`](modules.md#openapiobjecttype) | The type of objects to extract (e.g., 'responses'). |
+| `objectType` | [`OpenApiObjectType`](modules.md#openapiobjecttype) | The type of objects to extract (e.g., 'responses', 'pathItems', 'headers', etc.). |
 
 #### Returns
 
