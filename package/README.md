@@ -1,3 +1,9 @@
+## Description
+
+CLI Application that lists objects with given type from OpenAPI document.
+
+Note - Even though all types have been seperately tested, there is a chance of errors. If such a thing happens please contact the authors.
+
 ## Installation
 ```
 npm i -g openapi-type-finder
@@ -69,7 +75,7 @@ Done
 * requestBodyObject.content[x].examples[y] -> Example Object [x-> Media Type Object, y-> string]
 * responseObject.content[x].examples[y] -> Example Object  [x->Media Type Object]
 * parameterObject.examples[x] -> Example Object [x-> string]
-* headerObject.examples.z -> Example Object
+* headerObject.examples[x] -> Example Object
 
 
 ## Request Bodies (1)

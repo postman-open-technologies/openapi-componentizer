@@ -3,7 +3,7 @@
 * [x] schemas
 * [x] responses
 * [x] parameters
-* [ ] examples
+* [x] examples
 * [x] requestBodies
 * [x] headers
 * [x] securitySchemes
@@ -62,11 +62,11 @@ Done
 
 ### Test 1
 ```
-pathItemObject.parameters[x] -> Parameter Object | Reference Object [x-> int]
+pathItemObject.parameters[x] -> Parameter Object | Reference Object 
 ```
 Input
 ```
-https://oai.github.io/Documentation/examples/tictactoe.yaml
+http://localhost:5500/package/testFiles/parameterTest.yaml
 ```
 Output
 ```
@@ -75,7 +75,7 @@ Correct
 
 ### Test 2
 ```
-pathItemObject[x].parameters[y] -> Parameter Object | Reference Object [x-> Operation Object, y-> int]
+pathItemObject[x].parameters[y] -> Parameter Object | Reference Object
 ```
 Input
 ```
@@ -91,12 +91,16 @@ Done
 
 ### Test 1
 ```
-requestBodyObject.content[x].examples[y] -> Example Object [x-> Media Type Object, y-> string]
+requestBodyObject.content[x].examples[y] -> Example Object
+```
+Input
+```
+http://localhost:5500/package/testFiles/callbackTest.yaml
 ```
 
 ### Test 2
 ```
-responseObject.content[x].examples[y] -> Example Object  [x->Media Type Object]
+responseObject.content[x].examples[y] -> Example Object  
 ```
 Input
 ```
@@ -109,11 +113,25 @@ Correct
 
 ### Test 3
 ```
-//parameterObject.examples[x] -> Example Object [x-> string]
+//parameterObject.examples[x] -> Example Object 
 ```
 Input
+```
+http://localhost:5500/package/testFiles/parameterTest.yaml
+```
 
 ### Test 4
+```
+headerObject.examples[x] -> Example Object
+```
+Input
+```
+http://localhost:5500/package/testFiles/headerTest2.json
+```
+Output
+```
+Correct
+```
 ## requestBodies (1)
 
 ### Test 1

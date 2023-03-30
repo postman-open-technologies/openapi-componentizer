@@ -30,7 +30,7 @@ const getSchemas = (document) => {
             }
         }
     }
-    
+
     //response.content[x].schema -> Schema Object
 
     const responses = getResponses(document);
@@ -189,7 +189,7 @@ const getExamples = (document) => {
                 }
     }
 
-    //headerObject.examples.z -> Example Object
+    //headerObject.examples[x] -> Example Object
 
     const headers = getHeaders(document);
     for(let header in headers){
@@ -197,8 +197,7 @@ const getExamples = (document) => {
         if(headerObject.examples){
             const examples = headerObject.examples;
             for(let example in examples){
-                    let exampleObject = {};
-                    exampleObject[example] = examples[example];
+                    let exampleObject = examples[example];
                     res.push(JSON.stringify(exampleObject, undefined, 4));
                 }
             }

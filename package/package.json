@@ -1,6 +1,6 @@
 {
   "name": "openapi-type-finder",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Finds list of objects of given type from OpenAPI document.",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,9 @@
     "lodash": "^4.17.21",
     "swagger-client": "^3.19.2",
     "yaml": "^2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Polaris66/openapi-componentizer"
   }
 }

@@ -50,6 +50,13 @@ paths:
                           format: date-time
                         userData:
                           type: string
+                    examples:
+                      a:
+                        timestamp: 2009-06-15T13:45:30
+                        userData: test
+                      b:
+                        timestamp: 2010-06-15T13:45:30
+                        userData: hi
               responses:
                 "202":
                   description: |
