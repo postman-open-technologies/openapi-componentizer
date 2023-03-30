@@ -49,11 +49,10 @@ Done
 
 
 
-## Schemas (5)
+## Schemas (4)
 * parameterObject.schema -> Schema Object
-* requestBodyObject.content.x.schema -> Schema Object
-* response[x].schema -> Schema Object [x->Status Code]
-* response[x].content.y.schema -> Schema Object [x->Status Code, y->Media Type Object]
+* requestBodyObject.content[x].schema -> Schema Object
+* response.content[x].schema -> Schema Object
 * headerObject.schema
 
 ## Responses (1)
@@ -67,9 +66,9 @@ Done
 <!-- * linkObject.parameters.x -> Map[string, Any | {expression}] --> -> Not a parameterObject
 
 ## Examples (4)
-* requestBodyObject.content.x.examples.y -> Example Object
-* parameterObject.examples.x -> Example Object [x->Media Type Object]
-* response[x].content.y.examples.z -> Example Object [x->Status Code, y->Media Type Object]
+* requestBodyObject.content[x].examples[y] -> Example Object [x-> Media Type Object, y-> string]
+* responseObject.content[x].examples[y] -> Example Object  [x->Media Type Object]
+* parameterObject.examples[x] -> Example Object [x-> string]
 * headerObject.examples.z -> Example Object
 
 
@@ -79,7 +78,7 @@ Done
 
 ## Headers (2)
 
-* requestBodyObject.content.x.encoding.headers[y] ->Header Object | Reference Object [x->Media Type Object]
+* requestBodyObject.content[x].encoding[y].headers[z] ->Header Object | Reference Object [x-> string, y -> string, z -> string]
 * responseObject.headers[y] -> Header Object | Reference Object [x->Status Code]
 
 ## Security Schemes (1)

@@ -14,7 +14,7 @@ const getSchemas = (document) => {
             }
     }
 
-    //requestBodyObject.content.x.schema -> Schema Object
+    //requestBodyObject.content[x].schema -> Schema Object
     
     const requestBodies = getRequestBodies(document);
     for(let requestBody in requestBodies){
@@ -30,26 +30,12 @@ const getSchemas = (document) => {
             }
         }
     }
+    
+    //response.content[x].schema -> Schema Object
 
-    // response[x].schema -> Schema Object [x->Status Code]
     const responses = getResponses(document);
-    for(let index in responses){
-        let response = JSON.parse(responses[index]);
-        for(let statusCode in response){
-            const responseObject = response[statusCode];
-            if(responseObject.schema){
-                const schema = responseObject.schema;
-                res.push(JSON.stringify(schema, undefined, 4));
-            }
-        }
-    }
-
-    //response[x].content.y.schema -> Schema Object [x->Status Code, y->Media Type Object]
-
-    for(let index in responses){
-        let response = JSON.parse(responses[index]);
-        for(let statusCode in response){
-            const responseObject = response[statusCode];
+    for(let response in responses){
+        let responseObject = JSON.parse(responses[response]);
             if(responseObject.content){
                 const content = responseObject.content;
                 for(let mediaType in content){
@@ -59,7 +45,6 @@ const getSchemas = (document) => {
                         res.push(JSON.stringify(schema, undefined, 4));
                     }
                 }
-            }
         }
     }
 
@@ -150,7 +135,7 @@ const getParameters = (document) => {
 const getExamples = (document) => {
     let res = [];
 
-    //requestBodyObject.content.x.examples.y -> Example Object
+    //requestBodyObject.content[x].examples[y] -> Example Object [x-> Media Type Object, y-> string]
 
     const requestBodies = getRequestBodies(document);
     for(let requestBody in requestBodies){
@@ -162,8 +147,7 @@ const getExamples = (document) => {
                 if(mediaTypeObject.examples){
                     const examples = mediaTypeObject.examples;
                     for(let example in examples){
-                        let exampleObject = {};
-                        exampleObject[example] = examples[example];
+                        let exampleObject = examples[example];
                         res.push(JSON.stringify(exampleObject, undefined, 4));
                     }
                 }
@@ -171,28 +155,11 @@ const getExamples = (document) => {
         }
     }
 
-    //parameterObject.examples.x -> Example Object [x->Media Type Object]
-
-    const parameters = getParameters(document);
-    for(let parameter in parameters){
-        let parameterObject = JSON.parse(parameters[parameter]);
-        if(parameterObject.examples){
-                    const examples = parameterObject.examples;
-                    for(let example in examples){
-                        let exampleObject = {};
-                        exampleObject[example] = examples[example];
-                        res.push(JSON.stringify(exampleObject, undefined, 4));
-                    }
-                }
-    }
-
-    //response[x].content.y.examples.z -> Example Object [x->Status Code, y->Media Type Object]
+    //responseObject.content[x].examples[y] -> Example Object  [x->Media Type Object]
 
     const responses = getResponses(document);
-    for(let index in responses){
-        let response = JSON.parse(responses[index]);
-        for(let statusCode in response){
-            const responseObject = response[statusCode];
+    for(let response in responses){
+        let responseObject = JSON.parse(responses[response]);
             if(responseObject.content){
                 const content = responseObject.content;
                 for(let mediaType in content){
@@ -200,14 +167,26 @@ const getExamples = (document) => {
                     if(mediaTypeObject.examples){
                         const examples = mediaTypeObject.examples;
                         for(let example in examples){
-                            let exampleObject = {};
-                            exampleObject[example] = examples[example];
+                            let exampleObject = examples[example];
                             res.push(JSON.stringify(exampleObject, undefined, 4));
                             }
                         }
                     }
                 }
-            }
+    }
+
+    //parameterObject.examples[x] -> Example Object [x-> string]
+
+    const parameters = getParameters(document);
+    for(let parameter in parameters){
+        let parameterObject = JSON.parse(parameters[parameter]);
+        if(parameterObject.examples){
+                    const examples = parameterObject.examples;
+                    for(let example in examples){
+                        let exampleObject = examples[example];
+                        res.push(JSON.stringify(exampleObject, undefined, 4));
+                    }
+                }
     }
 
     //headerObject.examples.z -> Example Object

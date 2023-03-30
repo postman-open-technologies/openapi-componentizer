@@ -1,6 +1,6 @@
 # Types Done:
 
-* [ ] schemas
+* [x] schemas
 * [x] responses
 * [x] parameters
 * [ ] examples
@@ -10,6 +10,39 @@
 * [x] links
 * [x] callbacks
 * [x] pathItems
+
+## schemas (4)
+
+### Test 1 (3)
+```
+parameterObject.schema -> Schema Object
+requestBodyObject.content[x].schema -> Schema Object
+response.content[x].schema -> Schema Object
+```
+Input
+```
+http://localhost:5500/package/testFiles/callbackTest.yaml
+```
+Output
+```
+Correct
+```
+
+### Test 2 (1)
+```
+headerObject.schema
+```
+Input
+```
+http://localhost:5500/package/testFiles/headerTest1.yaml
+http://localhost:5500/package/testFiles/headerTest2.json
+```
+Output
+```
+Correct
+```
+Done
+
 ## responses (1)
 ```
 pathItemObject[x].responses[y] -> Response Object | Reference Object [x->Operation, y->Status Code]
@@ -54,6 +87,33 @@ Correct
 ```
 Done
 
+## examples (4)
+
+### Test 1
+```
+requestBodyObject.content[x].examples[y] -> Example Object [x-> Media Type Object, y-> string]
+```
+
+### Test 2
+```
+responseObject.content[x].examples[y] -> Example Object  [x->Media Type Object]
+```
+Input
+```
+http://localhost:5500/package/testFiles/exampleTest2.json
+```
+Output
+```
+Correct
+```
+
+### Test 3
+```
+//parameterObject.examples[x] -> Example Object [x-> string]
+```
+Input
+
+### Test 4
 ## requestBodies (1)
 
 ### Test 1
