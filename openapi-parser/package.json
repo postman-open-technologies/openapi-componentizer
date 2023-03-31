@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "tsup --watch",
     "clean": "rimraf build",
-    "build:ts": "tsup src/index.ts --dts",
+    "build:ts": "tsup src/cli/main.ts --dts",
     "build": "npm-run-all clean build:ts",
-    "start": "node build/cli/main.js",
+    "start": "node build/main.mjs",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "prepare": "cd .. && husky install openapi-parser/.husky",
     "pre-commit": "lint-staged",
@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "cac": "^6.7.3",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "node-fetch": "^3.3.1"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
