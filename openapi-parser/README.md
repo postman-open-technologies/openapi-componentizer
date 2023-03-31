@@ -131,3 +131,14 @@ npm test
 ```
 
 This will run Jest on all test files in the project, providing a summary of the test results.
+
+## TODO
+
+List of additional planned improvements 
+
+1. **Improve Parser**: Get feedback from mentors
+2. **Code Coverage**: Finish unit tests and code coverage
+3. **Continuous Integration**: automatic builds and tests
+4. **License**: Apache License 2.0?
+5. **Changelog**: Maintain a `CHANGELOG.md` file 
+6. **Roadmap**: Outline a roadmap if necessary
