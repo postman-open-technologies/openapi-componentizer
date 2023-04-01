@@ -80,11 +80,11 @@
           "color": "Black",
           "gender": "Female",
           "breed": "Mixed"
-        },
+        }
+      },
       "frog": {
           "$ref": "#/components/examples/frog-example"
         }
-      }
     }
   }
 }

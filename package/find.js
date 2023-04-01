@@ -14,7 +14,7 @@ const getSchemas = (document) => {
             }
     }
 
-    //requestBodyObject.content[x].schema -> Schema Object
+    //requestBodycontent[x].schema -> Schema Object
     
     const requestBodies = getRequestBodies(document);
     for(let requestBody in requestBodies){
@@ -31,12 +31,14 @@ const getSchemas = (document) => {
         }
     }
 
-    //response.content[x].schema -> Schema Object
+    //response[x].content[y].schema -> Schema Object
 
     const responses = getResponses(document);
     for(let response in responses){
         let responseObject = JSON.parse(responses[response]);
-            if(responseObject.content){
+            for(let statusCode in responseObject){
+                responseObject = responseObject[statusCode];
+                if(responseObject.content){
                 const content = responseObject.content;
                 for(let mediaType in content){
                     const mediaTypeObject = content[mediaType];
@@ -45,16 +47,20 @@ const getSchemas = (document) => {
                         res.push(JSON.stringify(schema, undefined, 4));
                     }
                 }
-        }
+                }
+            }
     }
 
-    //headerObject.schema
+    //headerObject[x].schema -> Schema Object
     const headers = getHeaders(document);
     for(let header in headers){
-        const headerObject = JSON.parse(headers[header]);
-        if(headerObject.schema){
+        let headerObject = JSON.parse(headers[header]);
+        for(let name in headerObject){
+            headerObject = headerObject[name];
+            if(headerObject.schema){
             const schema = headerObject.schema;
             res.push(JSON.stringify(schema, undefined, 4));
+            }
         }
     }
 
@@ -65,20 +71,24 @@ const getSchemas = (document) => {
 const getResponses = (document) => {
     let res = [];
 
-    //pathItemObject[x].responses[y] -> Response Object | Reference Object [x->Operation, y->Status Code]
+    //pathItemObject[x].responses.y -> {Status Code/ "default" : Response Object | Reference Object}
     const pathItemObjects = getPathItems(document,1);
     
     for(let pathItem in pathItemObjects){
-        const pathItemObject = JSON.parse(pathItemObjects[pathItem]);
-        for(let operation in pathItemObject){
+        let pathItemObject = JSON.parse(pathItemObjects[pathItem]);
+        for(let path in pathItemObject){
+            pathItemObject = pathItemObject[path];
+            for(let operation in pathItemObject){
             const operationObject = pathItemObject[operation];
             if(operationObject.responses){
                 const responses = operationObject.responses;
                 for(let response in responses){
-                    const responseObject = responses[response];
+                    let responseObject = {};
+                    responseObject[response] = responses[response];
                     res.push(JSON.stringify(responseObject, undefined, 4));
                 }
             }
+        }
         }
     }
     return res;
@@ -89,9 +99,10 @@ const getParameters = (document) => {
 
     const pathItemObjects = getPathItems(document,1);
     for(let pathItem in pathItemObjects){
-        const pathItemObject = JSON.parse(pathItemObjects[pathItem]);
-        
-        // pathItemObject.parameters[x] -> Parameter Object | Reference Object [x-> int]
+        let pathItemObject = JSON.parse(pathItemObjects[pathItem]);
+        for(let path in pathItemObject){
+            pathItemObject = pathItemObject[path];
+            // pathItem[x].parameters[y] -> Parameter Object | Reference Object
 
         if(pathItemObject.parameters){
             const parameters = pathItemObject.parameters;
@@ -101,7 +112,7 @@ const getParameters = (document) => {
             }
         }
 
-        // pathItemObject[x].parameters[y] -> Parameter Object | Reference Object [x-> Operation Object, y-> int]
+        // pathItem[x][y].parameters[z] -> Parameter Object | Reference Object [x-> Operation Object, y-> int]
 
         for(let operation in pathItemObject){
             const operationObject = pathItemObject[operation];
@@ -113,29 +124,16 @@ const getParameters = (document) => {
                 }
             }
         }
+        }
     }
 
-    // //linkObject.parameters.x -> Map[string, Any | {expression}]
-
-    // const linkObjects = getLinks(document);
-    // for(let link in linkObjects){
-    //     const linkObject = JSON.parse(linkObjects[link]);
-    //     if(linkObject.parameters){
-    //         const parameters = linkObject.parameters;
-    //         for(let parameter in parameters){
-    //             let parameterObject = {}; 
-    //             parameterObject[parameter] = parameters[parameter];
-    //             res.push(JSON.stringify(parameterObject, undefined, 4));
-    //         }
-    //     }
-    // }
     return res;
 }
 
 const getExamples = (document) => {
     let res = [];
 
-    //requestBodyObject.content[x].examples[y] -> Example Object [x-> Media Type Object, y-> string]
+    //requestBody.content[x].examples.y -> {name: Example Object}
 
     const requestBodies = getRequestBodies(document);
     for(let requestBody in requestBodies){
@@ -147,7 +145,8 @@ const getExamples = (document) => {
                 if(mediaTypeObject.examples){
                     const examples = mediaTypeObject.examples;
                     for(let example in examples){
-                        let exampleObject = examples[example];
+                        let exampleObject = {};
+                        exampleObject[example] = examples[example];
                         res.push(JSON.stringify(exampleObject, undefined, 4));
                     }
                 }
@@ -155,11 +154,13 @@ const getExamples = (document) => {
         }
     }
 
-    //responseObject.content[x].examples[y] -> Example Object  [x->Media Type Object]
+    //response[x].content[y].examples.z -> {name: Example Object}
 
     const responses = getResponses(document);
     for(let response in responses){
         let responseObject = JSON.parse(responses[response]);
+        for(let statusCode in responseObject){
+            responseObject = responseObject[statusCode];
             if(responseObject.content){
                 const content = responseObject.content;
                 for(let mediaType in content){
@@ -167,15 +168,17 @@ const getExamples = (document) => {
                     if(mediaTypeObject.examples){
                         const examples = mediaTypeObject.examples;
                         for(let example in examples){
-                            let exampleObject = examples[example];
+                            let exampleObject = {}; 
+                            exampleObject[example] = examples[example];
                             res.push(JSON.stringify(exampleObject, undefined, 4));
                             }
                         }
                     }
                 }
+        }
     }
 
-    //parameterObject.examples[x] -> Example Object [x-> string]
+    //parameterObject.examples.x -> Example Object {name: Example Object}
 
     const parameters = getParameters(document);
     for(let parameter in parameters){
@@ -183,26 +186,30 @@ const getExamples = (document) => {
         if(parameterObject.examples){
                     const examples = parameterObject.examples;
                     for(let example in examples){
-                        let exampleObject = examples[example];
+                        let exampleObject = {};
+                        exampleObject[example] = examples[example];
                         res.push(JSON.stringify(exampleObject, undefined, 4));
                     }
                 }
     }
 
-    //headerObject.examples[x] -> Example Object
+    //headerObject[x].examples.y -> {name: Example Object}
 
     const headers = getHeaders(document);
     for(let header in headers){
-        const headerObject = JSON.parse(headers[header]);
-        if(headerObject.examples){
+        let headerObject = JSON.parse(headers[header]);
+        for(let name in headerObject){
+            headerObject = headerObject[name];
+            if(headerObject.examples){
             const examples = headerObject.examples;
             for(let example in examples){
-                    let exampleObject = examples[example];
+                    let exampleObject = {}; 
+                    exampleObject[example] = examples[example];
                     res.push(JSON.stringify(exampleObject, undefined, 4));
                 }
             }
         }
-
+        }
     return res;
 }
 
@@ -212,13 +219,16 @@ const getRequestBodies = (document) => {
     //pathItemObject[x].requestBody -> Request Body Object | Reference Object [x-> Operation Object]
     const pathItemObjects = getPathItems(document,1);
     for(let pathItem in pathItemObjects){
-        const pathItemObject = JSON.parse(pathItemObjects[pathItem]);
-        for(let operation in pathItemObject){
+        let pathItemObject = JSON.parse(pathItemObjects[pathItem]);
+        for(let path in pathItemObject){
+            pathItemObject = pathItemObject[path];
+            for(let operation in pathItemObject){
             const operationObject = pathItemObject[operation];
             if(operationObject.requestBody){
                 const requestBodyObject = operationObject.requestBody;
                 res.push(JSON.stringify(requestBodyObject, undefined, 4));
             }
+        }
         }
     }
     return res;
@@ -226,7 +236,7 @@ const getRequestBodies = (document) => {
 
 const getHeaders = (document) => {
     let res = [];
-    //requestBodyObject.content[x].encoding[y].headers[z] ->Header Object | Reference Object [x-> string, y -> string, z -> string]
+    //requestBody.content[x].encoding[y].headers.z ->{name: Header Object | Reference Object}
     const requestBodies = getRequestBodies(document);
     for(let requestBody in requestBodies){
         let requestBodyObject = JSON.parse(requestBodies[requestBody]);
@@ -241,7 +251,8 @@ const getHeaders = (document) => {
                         if(encodingObject.headers){
                         const headers = encodingObject.headers;
                         for(let header in headers){
-                                const headerObject = headers[header];
+                                let headerObject = {};
+                                headerObject[header] = headers[header];
                                 res.push(JSON.stringify(headerObject, undefined, 4));
                             }
                         }
@@ -251,18 +262,22 @@ const getHeaders = (document) => {
         }
     }
 
-    //response.headers[y] -> Header Object | Reference Object [x->Status Code]
+    //responseObject[x].headers.y -> {name: Header Object | Reference Object }
 
     const responses = getResponses(document);
     for(let response in responses){
         let responseObject = JSON.parse(responses[response]);
+        for(let statusCode in responseObject){
+            responseObject = responseObject[statusCode];
             if(responseObject.headers){
                 const headers = responseObject.headers;
                 for(let header in headers){
-                        let headerObject = headers[header];
+                        let headerObject = {}; 
+                        headerObject[header] = headers[header];
                         res.push(JSON.stringify(headerObject, undefined, 4));
                     }
                 }
+        }
     }
     return res;
 }
@@ -271,14 +286,15 @@ const getSecuritySchemes = (document) => {
     
     let res = [];
     
-    // document.components.securitySchemes[x] -> Security Scheme Object | Reference Object
+    // document.components.securitySchemes.x -> { name : Security Scheme Object | Reference Object}
     
     if(document.components){
         const components = document.components;
         if(components.securitySchemes){
             const securitySchemes = components.securitySchemes;
             for(let securityScheme in securitySchemes){
-                let securitySchemeObject = securitySchemes[securityScheme];
+                let securitySchemeObject = {};
+                securitySchemeObject[securityScheme] = securitySchemes[securityScheme];
                 res.push(JSON.stringify(securitySchemeObject, undefined, 4));
             }
         }
@@ -290,17 +306,18 @@ const getSecuritySchemes = (document) => {
 const getLinks = (document) => {
     let res = [];
     
-    //response[x].links[y] -> Link Object | Reference Object [x->Status Code] [y-> string]
+    //response[x][y].links.z -> {name: Link Object | Reference Object}
 
     const responses = getResponses(document);
     for(let index in responses){
         let response = JSON.parse(responses[index]);
-        for(let statusCode in response){
+            for(let statusCode in response){
             const responseObject = response[statusCode];
             if(responseObject.links){
                 const links = responseObject.links;
                 for(let link in links){
-                    const linkObject = links[link];
+                    let linkObject = {};
+                    linkObject[link] = links[link];
                     res.push(JSON.stringify(linkObject, undefined, 4));
                 }
             }
@@ -312,19 +329,23 @@ const getLinks = (document) => {
 const getCallbacks = (document) => {
     let res = [];
     
-    //pathItemObject[x].callbacks[y] -> Callback Object | Reference Object [x-> Operation Object] [y -> string]
+    //pathItem[x][y].callbacks.z -> {name: Callback Object | Reference Object}
     const pathItems = getPathItems(document,0);
     for(let pathItem in pathItems){
-        const pathItemObject = JSON.parse(pathItems[pathItem]);
-        for(let operation in pathItemObject){
+        let pathItemObject = JSON.parse(pathItems[pathItem]);
+        for(let path in pathItemObject){
+            pathItemObject = pathItemObject[path];
+            for(let operation in pathItemObject){
             const operationObject = pathItemObject[operation];
             if(operationObject.callbacks){
                 const callbacks = operationObject.callbacks;
                 for(let callback in callbacks){
-                    const callbackObject = callbacks[callback];
+                    const callbackObject = {};
+                    callbackObject[callback] = callbacks[callback];
                     res.push(JSON.stringify(callbackObject, undefined, 4));
                 }
             }
+        }
         }
     }
     return res;
@@ -333,33 +354,39 @@ const getCallbacks = (document) => {
 const getPathItems = (document,callbacksFlag) => {
     let res = [];
     
-    //document.webhooks[x] -> Path Item Object | Reference Object [x-> string]
+    //document.webhooks.x -> {path:Path Item Object | Reference Object}
 
     if(document.webhooks){
         const webhooks = document.webhooks;
         for(let webhook in webhooks){
-            const pathItemObject = webhooks[webhook];
+            let pathItemObject = {};
+            pathItemObject[webhook] = webhooks[webhook];
             res.push(JSON.stringify(pathItemObject, undefined, 4));
         }
     }
-    //document.paths[x] -> Path Item Object [x-> /{path}]
+    //document.paths.x -> {path:Path Item Object | Reference Object}
     if(document.paths){
         
         const paths = document.paths;
         for(let path in paths){
-            const pathItemObject = document.paths[path];
+            const pathItemObject = {}; 
+            pathItemObject[path] = document.paths[path];
             res.push(JSON.stringify(pathItemObject, undefined, 4));
         }
     }
 
-    // callbacks[x][y] -> Path Item Object | Reference Object [x-> callback, y ->key expression]
+    // callbacks[x].y -> {path:Path Item Object | Reference Object} 
     if(callbacksFlag){
         const callbacks = getCallbacks(document)
         for(let callback in callbacks){
-            const callbackObject = JSON.parse(callbacks[callback]);
-            for(let expression in callbackObject){
-                const pathItemObject = callbackObject[expression];
+            let callbackObject = JSON.parse(callbacks[callback]);
+            for(let name in callbackObject){
+                callbackObject = callbackObject[name];
+                for(let expression in callbackObject){
+                const pathItemObject = {}; 
+                pathItemObject[expression] = callbackObject[expression];
                 res.push(JSON.stringify(pathItemObject, undefined, 4));
+            }
             }
         }
     }

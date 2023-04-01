@@ -39,6 +39,8 @@ Output:
 
 # Types Done:
 
+A checklist for which types have been implemented.
+
 * [x] schemas
 * [x] responses
 * [x] parameters
@@ -54,50 +56,48 @@ Output:
 
 ## Schemas (4)
 * parameterObject.schema -> Schema Object
-* requestBodyObject.content[x].schema -> Schema Object
-* response.content[x].schema -> Schema Object
-* headerObject.schema
+* requestBody.content[x].schema -> Schema Object
+* response[x].content[y].schema -> Schema Object
+* headerObject[x].schema -> Schema Object
 
 ## Responses (1)
 
-* pathItemObject[x].responses[y] -> Response Object | Reference Object [x->Operation, y->Status Code]
+* pathItemObject[x].responses.y -> {Status Code/ "default" : Response Object | Reference Object}
 
 ## Parameters  (2)
 
-* pathItemObject.parameters[x] -> Parameter Object | Reference Object [x-> int]
-* pathItemObject[x].parameters[y] -> Parameter Object | Reference Object [x-> Operation Object, y-> int]
-<!-- * linkObject.parameters.x -> Map[string, Any | {expression}] --> -> Not a parameterObject
-
+* pathItem[x].parameters[y] -> Parameter Object | Reference Object 
+* pathItem[x][y].parameters[z] -    > Parameter Object | Reference Object 
+  
 ## Examples (4)
-* requestBodyObject.content[x].examples[y] -> Example Object [x-> Media Type Object, y-> string]
-* responseObject.content[x].examples[y] -> Example Object  [x->Media Type Object]
-* parameterObject.examples[x] -> Example Object [x-> string]
-* headerObject.examples[x] -> Example Object
+* requestBody.content[x].examples.y -> {name: Example Object}
+* response[x].content[y].examples.z -> {name: Example Object}
+* parameterObject.examples.x -> {name: Example Object}
+* headerObject[x].examples.y -> {name: Example Object}
 
 
 ## Request Bodies (1)
 
-* pathItemObject[x].requestBody -> Request Body Object | Reference Object [x-> Operation Object]
+* pathItemObject[x].requestBody -> Request Body Object | Reference Object 
 
 ## Headers (2)
 
-* requestBodyObject.content[x].encoding[y].headers[z] ->Header Object | Reference Object [x-> string, y -> string, z -> string]
-* responseObject.headers[y] -> Header Object | Reference Object [x->Status Code]
+* requestBody.content[x].encoding[y].headers.z ->{name: Header Object | Reference Object}
+* responseObject[x].headers.y -> {name: Header Object | Reference Object } 
 
 ## Security Schemes (1)
-* document.components.securitySchemes[x] -> Security Scheme Object | Reference Object
+* document.components.securitySchemes.x -> { name : Security Scheme Object | Reference Object}
 
 Each name MUST correspond to a security scheme which is declared in the Security Schemes under the Components Object. 
 Security Schemes are not defined anywhere else.
 
 ## Links (1)
-* response[x].links[y] -> Link Object | Reference Object [x->Status Code] [y-> string]
+* response[x][y].links.z -> {name: Link Object | Reference Object}
 
-## Callbacks (1)
-* pathItemObject[x].callbacks[y] -> Callback Object | Reference Object [x-> Operation Object] [y -> string]
-(Without including pathItemObjects within callbacks) 
+## callbacks (1)
+* pathItem[x][y].callbacks.z -> {name: Callback Object | Reference Object}
 
-## Path Item Objects (3)
-* document.paths[x] -> Path Item Object [x-> /{path}]
-* callbacks[x][y] -> Path Item Object | Reference Object [x-> callback, y ->key expression]
-* document.webhooks[x] -> Path Item Object | Reference Object [x-> string]
+## pathItems (3)
+* document.paths.x -> {path:Path Item Object | Reference Object}
+* callbacks[x].y -> {path:Path Item Object | Reference Object} 
+* document.webhooks.x -> {path:Path Item Object | Reference Object}

@@ -92,8 +92,8 @@ components:
       schema:
         $ref: "#/components/schemas/coordinate"
       examples:
-        a: 1
-        b: 2
+        in: 1
+        value: 2
     columnParam:
       description: Board column (horizontal coordinate)
       name: column
