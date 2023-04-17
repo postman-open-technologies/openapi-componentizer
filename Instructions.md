@@ -14,6 +14,8 @@ npm install axios yargs yaml
 ```
 Note - Replace <OPENAPI_SPEC_URL> with the URL of the OpenAPI specification you want to parse, and <OBJECT_TYPE> with the type of object you want to list.
 
+Input URL: https://api.apis.guru/v2/specs/openweathermap.org/2.5/swagger.yaml
+
 # Packages Used
 * Using the using the 'yargs' package to parse the command-line arguments.
 * Using the 'axios' package to fetch the OpenAPI specification from the given URL.
