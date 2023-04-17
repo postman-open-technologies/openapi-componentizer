@@ -33,7 +33,12 @@ axios.get(argv.url)
   .then(response => {
     const openapiSpec = yaml.parse(response.data);
     const objects = openapiSpec[argv.type];
-    console.log(objects);
+    // const objects = openapiSpec[argv.type];
+    if (objects = openapiSpec[argv.type]) {
+      console.log(objects);
+    } else {
+      console.error(`No objects of type ${argv.type} found in the OpenAPI specification.`);
+    }
   })
   .catch(error => {
     console.error(error);
