@@ -10,7 +10,7 @@ npm install axios yargs yaml
 ```
 # To Run the Code
 ```
-    node openapi-parser.js --url <OPENAPI_SPEC_URL> --type <OBJECT_TYPE>
+    node openapi_parser.js --url <OPENAPI_SPEC_URL> --type <OBJECT_TYPE>
 ```
 Note - Replace <OPENAPI_SPEC_URL> with the URL of the OpenAPI specification you want to parse, and <OBJECT_TYPE> with the type of object you want to list.
 
